@@ -1,0 +1,89 @@
+{
+   "chromeMetadata": {
+      "OS": "Windows 11 Version 23H2 (Build 22631.5768)",
+      "application": "Microsoft Edge",
+      "revision": "c935b48ca94adeba2eaf231bee0d9e30785a59de",
+      "version": "139.0.3405.119 (Official build) (64-bit)"
+   },
+   "policyValues": {
+      "chrome": {
+         "name": "Microsoft Edge Policies",
+         "policies": {
+            "ExtensionInstallForcelist": {
+               "level": "mandatory",
+               "scope": "machine",
+               "source": "platform",
+               "value": [ "indnfmjggacaealknojjmnaadnoclllg;https://edge.microsoft.com/extensionwebstorebase/v1/crx" ]
+            },
+            "ExtensionInstallSources": {
+               "level": "mandatory",
+               "scope": "machine",
+               "source": "platform",
+               "value": [ "https://microsoftedge.microsoft.com/addons/*", "https://chrome.google.com/webstore/*" ]
+            },
+            "ExtensionSettings": {
+               "level": "mandatory",
+               "scope": "machine",
+               "source": "platform",
+               "value": {
+                  "indnfmjggacaealknojjmnaadnoclllg": {
+                     "toolbar_state": "force_shown"
+                  }
+               }
+            },
+            "HomepageLocation": {
+               "level": "mandatory",
+               "scope": "machine",
+               "source": "platform",
+               "value": "https://sascosg.sharepoint.com/sites/SASCOSeniorCitizens'Home"
+            },
+            "RestoreOnStartup": {
+               "level": "mandatory",
+               "scope": "machine",
+               "source": "platform",
+               "value": 4
+            },
+            "HomepageIsNewTabPage": {
+               "level": "mandatory",
+               "scope": "machine",
+               "source": "platform",
+               "value": false
+            },
+            "ImportHomepage": {
+               "level": "mandatory",
+               "scope": "machine",
+               "source": "platform",
+               "value": false
+            },
+            "ShowHomeButton": {
+               "level": "mandatory",
+               "scope": "machine",
+               "source": "platform",
+               "value": true
+            }
+         }
+      },
+      "extensions": {
+      },
+      "precedence": {
+         "name": "Policy Precedence",
+         "policies": {
+         },
+         "precedenceOrder": [ "Platform machine", "Cloud machine", "Platform user", "Cloud user" ]
+      },
+      "updater": {
+         "name": "Microsoft EdgeUpdate Policies",
+         "policies": {
+         }
+      }
+   },
+   "status": {
+      "updater": {
+         "policyDescriptionKey": "statusUpdater",
+         "timeSinceLastRefresh": "4 hours ago",
+         "version": "1.3.195.65"
+      },
+      "user": {
+      }
+   }
+}
