@@ -29,7 +29,7 @@ You'll be creating a **Win32 app** in Intune. This is the most flexible method f
    *   Log in to your Action1 portal.
    *   Go to **Endpoints** > **Add Endpoint**.
    *   Action1 will provide you with a customized download link for the agent. This link includes a unique token that automatically assigns the installed agent to your account. **This is the key step.** Download this custom installer (e.g., `Action1_Agent_[YourOrgCode].exe`).
-![action1customInstaller](/pics/action1customInstaller.jpg)
+![action1customInstaller](/pics/action1_custom_installer.jpg)
 
 **2. Prepare the Installer for Intune:**
    *   Create a folder on your computer and place the downloaded `Action1_Agent_Setup.exe` file inside it.
