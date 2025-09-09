@@ -81,3 +81,77 @@ Using Intune to deploy Action1 gives you the best of both worlds:
 *   **Action1's Strength:** Specialized, seamless patch management for third-party applications (like Chrome, Adobe, Zoom) that Intune's native patching may not cover as quickly or comprehensively, plus integrated remote access.
 
 This is a standard and highly effective integration for modern IT departments.
+
+### further description for clarity
+Excellent questions. You've hit on the two most common points of confusion when first using the IntuneWinAppUtil tool. Let's clear this up completely.
+
+You are right to be confused! The error messages are misleading because they are about files on **your machine (the admin's machine)**, not the end-user's device.
+
+Let's break it down:
+
+### 1. The "Setup File" and "Source Folder" are on YOUR PC
+
+This entire process happens on **your administrative computer** (the one you are using to prepare the app for Intune). You are creating a special package file (`.intunewin`) that you will later upload to the Intune website.
+
+*   **Source Folder:** This is a folder on **your PC's hard drive** (e.g., `C:\IntunePackages\Action1`) where you have stored the Action1 installer file that you downloaded.
+*   **Setup File:** This is the exact name of the installer file you placed in that folder (e.g., `Action1_Agent_Setup.exe`).
+*   **Output Folder:** This is a *different* folder on **your PC's hard drive** (e.g., `C:\IntunePackages\Output`) where you want the tool to *save* the new `.intunewin` file it creates.
+
+The tool is not talking about the end-user's device yet. That configuration comes later inside the Intune admin center.
+
+---
+
+### 2. Getting the Correct Action1 Installer File
+
+This is the most critical step. You cannot use the generic download from the public website. You **must** get a customized installer from *your* Action1 portal that contains your unique registration token.
+
+**Here is how to get the correct file:**
+
+1.  Log in to your Action1 cloud console at **[https://www.action1.com/](https://www.action1.com/)**.
+2.  On the left-hand menu, go to **Endpoints**.
+3.  Click on the **Add Endpoint** button.
+4.  Action1 will present you with several options. You need the one for **"Download Agent for Silent Installation"** or similar. It will provide a download link for a file that typically has a name like:
+    *   `action1_agent_setup.exe`
+    *   Or sometimes it might include your company name in the file name.
+
+    This specific file is pre-configured to automatically register any device it's installed on to your Action1 account. If you use a generic installer, the devices will not appear in your dashboard.
+
+5.  **Download this file** and save it to a folder on your computer, for example: `C:\IntunePackages\Action1`
+
+---
+
+### Corrected Step-by-Step Example
+
+Let's walk through the tool again with the correct paths.
+
+1.  **Create folders on your PC:**
+    *   `C:\IntunePackages\Action1` (to hold the installer)
+    *   `C:\IntunePackages\Output` (to receive the finished .intunewin file)
+
+2.  **Place the installer:** Put the customized `action1_agent_setup.exe` file you downloaded from *your* Action1 portal into the `C:\IntunePackages\Action1` folder.
+
+3.  **Run the IntuneWinAppUtil.exe tool.** It will ask you for the following. Type the paths carefully:
+
+    ```
+    Please specify the source folder: C:\IntunePackages\Action1
+    Please specify the setup file: action1_agent_setup.exe
+    Please specify the output folder: C:\IntunePackages\Output
+    Please specify the catalog folder (optional):
+    ```
+    (Just press `Enter` for the catalog folder; you don't need it.)
+
+4.  The tool will now run and create a new file in your `Output` folder called `action1_agent_setup.intunewin`.
+
+**This `action1_agent_setup.intunewin` file is what you upload to Microsoft Intune** when you follow the rest of the guide (creating a Win32 app, specifying the install command `action1_agent_setup.exe /S`, etc.).
+
+### What about the .MSI?
+
+You asked about an MSI. While Action1 primarily provides an EXE, some enterprise software vendors offer both. The process is identical:
+
+*   If Action1 provided an `.msi` file, you would use that instead.
+*   The install command would be: `msiexec /i "Action1_Agent_Setup.msi" /qn`
+*   The detection method would be much easier, as you could use the built-in **MSI product code** that is inside the file.
+
+However, based on their standard practice, the EXE is what you will likely use. Always use the customized installer from your portal.
+
+**In summary: You are working with files on your local machine to build a package. That package is then uploaded to Intune, which handles deploying it to your users' devices.**
